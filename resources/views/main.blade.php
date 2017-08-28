@@ -8,6 +8,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- Scripts -->
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
+
     <title>Paddy</title>
 
     <!-- Bootstrap core CSS -->
@@ -22,7 +32,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for this template -->
-    <link href="css/agency.min.css" rel="stylesheet">
+    <link href="css/agency.css" rel="stylesheet">
 
   </head>
 
@@ -30,7 +40,8 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-      <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+      <!-- <a class="navbar-brand" href="#page-top"></a> -->
+      <a href="#page-top"><img class="navbar-brand" src="../img/logos/paddy_brand.jpg"></a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fa fa-bars"></i>
@@ -38,20 +49,48 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#services">Services</a>
+            <a class="nav-link" href="#services">Servicios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#portfolio">Portfolio</a>
+              <a class="nav-link" href="#becourier">Sé un Paddy</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="#category">Categorías</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
+              <a class="nav-link" href="#bepartner">Afilia tu Negocio</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#team">Team</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
-          </li>
+          @if (Auth::guard('web_user')->guest())
+              <li class="nav-item">
+                  <a class="nav-link" href="#" data-toggle="modal" data-target="#login-modal">Ingresar</a>
+              </li>
+          @else
+              <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::guard('web_user')->users()->name }}
+                  <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                      <li>
+                          <a href="{{ url('/user_config') }}">
+                              MI CUENTA
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{ url('/user_orders') }}">
+                              MIS PEDIDOS
+                          </a>                      
+                      </li>
+                      <li>
+                          <a href="{{ url('/user_logout') }}"
+                              onclick="event.preventDefault();
+                                       document.getElementById('logout-form').submit();">
+                              SALIR
+                          </a>
+                          <form id="logout-form" action="{{ url('/user_logout') }}" method="POST" style="display: none;">
+                              {{ csrf_field() }}
+                          </form>
+                      </li>
+                  </ul>
+              </li>              
+          @endif          
         </ul>
       </div>
     </nav>
@@ -60,9 +99,10 @@
     <header class="masthead">
       <div class="container">
         <div class="intro-text">
-          <div class="intro-lead-in">Welcome To Our Studio!</div>
-          <div class="intro-heading">It's Nice To Meet You</div>
-          <a href="#services" class="btn btn-xl">Tell Me More</a>
+          <div class="intro-heading">DELIVERY EXPRESS!</div>
+          <div class="intro-lead-in">en menos de 90 minutos</div>
+          <div class="intro-lead-in">compramos y te llevamos lo que desees</div>
+          <a href="#services" class="btn btn-xl">Pide tu Paddy Aquí</a>
         </div>
       </div>
     </header>
@@ -202,87 +242,6 @@
         </div>
       </div>
     </section>
-
-    <!-- About -->
-<!--     <section id="about">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading">About</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <ul class="timeline">
-              <li>
-                <div class="timeline-image">
-                  <img class="rounded-circle img-fluid" src="img/about/1.jpg" alt="">
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4>2009-2011</h4>
-                    <h4 class="subheading">Our Humble Beginnings</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                  </div>
-                </div>
-              </li>
-              <li class="timeline-inverted">
-                <div class="timeline-image">
-                  <img class="rounded-circle img-fluid" src="img/about/2.jpg" alt="">
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4>March 2011</h4>
-                    <h4 class="subheading">An Agency is Born</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="timeline-image">
-                  <img class="rounded-circle img-fluid" src="img/about/3.jpg" alt="">
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4>December 2012</h4>
-                    <h4 class="subheading">Transition to Full Service</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                  </div>
-                </div>
-              </li>
-              <li class="timeline-inverted">
-                <div class="timeline-image">
-                  <img class="rounded-circle img-fluid" src="img/about/4.jpg" alt="">
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4>July 2014</h4>
-                    <h4 class="subheading">Phase Two Expansion</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                  </div>
-                </div>
-              </li>
-              <li class="timeline-inverted">
-                <div class="timeline-image">
-                  <h4>Be Part
-                    <br>Of Our
-                    <br>Story!</h4>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section> -->
 
     <!-- Team -->
     <section class="bg-light" id="team">
@@ -707,7 +666,7 @@
     <script src="js/contact_me.js"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="js/agency.min.js"></script>  
+    <script src="js/agency.js"></script>  
 
   </body>
 

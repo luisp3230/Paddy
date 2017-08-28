@@ -89,15 +89,21 @@ body {
       color: #fed136; }
 
 @media (min-width: 992px) {
-  #mainNav {
+  #mainNav {    
     padding-top: 25px;
     padding-bottom: 25px;
     -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
     -moz-transition: padding-top 0.3s, padding-bottom 0.3s;
     transition: padding-top 0.3s, padding-bottom 0.3s;
     border: none;
-    background-color: transparent; }
+    background-color: transparent;
+     }
     #mainNav .navbar-brand {
+      /*border: solid;*/
+      top: 25px;      
+      width:150px;
+      height:150px;
+      position:absolute;      
       font-size: 1.75em;
       -webkit-transition: all 0.3s;
       -moz-transition: all 0.3s;
@@ -108,9 +114,15 @@ body {
       padding-top: 0;
       padding-bottom: 0;
       background-color: #222222; }
-      #mainNav.navbar-shrink .navbar-brand {
+      #mainNav.navbar-shrink .navbar-brand {  
+        top: 0px;
+        position:relative; 
+        width:60px;
+        height:70px;
         font-size: 1.25em;
-        padding: 12px 0; } }
+        padding: 12px 0; 
+        }
+}
 
 header.masthead {
   text-align: center;
