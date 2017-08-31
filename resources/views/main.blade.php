@@ -22,9 +22,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
 
-    <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
@@ -34,13 +32,16 @@
     <!-- Custom styles for this template -->
     <link href="css/agency.css" rel="stylesheet">
 
+    <link href="css/nav.css" rel="stylesheet">
+    <link href="css/nav-theme.min.css" rel="stylesheet">
+
   </head>
 
   <body id="page-top">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-      <!-- <a class="navbar-brand" href="#page-top"></a> -->
+
       <a href="#page-top"><img class="navbar-brand" src="../img/logos/paddy_brand.jpg"></a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
@@ -50,21 +51,30 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" href="#services">Servicios</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="#becourier">Sé un Paddy</a>
-          </li>          
+          </li>         
           <li class="nav-item">
             <a class="nav-link" href="#category">Categorías</a>
           </li>
           <li class="nav-item">
+              <a class="nav-link" href="#becourier">Sé un Paddy</a>
+          </li>           
+          <li class="nav-item">
               <a class="nav-link" href="#bepartner">Afilia tu Negocio</a>
           </li>
-          @if (Auth::guard('web_user')->guest())
+          @if (Auth::guard('web_user')->guest()    and
+               Auth::guard('web_courier')->guest() and
+               Auth::guard('web_partner')->guest())
               <li class="nav-item">
-                  <a class="nav-link" href="#" data-toggle="modal" data-target="#login-modal">Ingresar</a>
+                <div class="portfolio-link nav-link" data-toggle="modal" href="#login-modal" style="cursor: pointer;">
+                  <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                      Ingresar
+                    </div>
+                  </div>
+                </div>
               </li>
-          @else
+
+          @elseif (!Auth::guard('web_user')->guest())
               <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::guard('web_user')->users()->name }}
                   <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
@@ -89,7 +99,25 @@
                           </form>
                       </li>
                   </ul>
-              </li>              
+              </li>
+          @elseif (!Auth::guard('web_courier')->guest())
+            <form name="courier_redirect" id="courier_redirect-form" action="{{ url('/courier_home') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+            <script type="text/javascript">
+              window.onload = function() {
+                 document.forms["courier_redirect"].submit();
+              }
+            </script>
+          @elseif (!Auth::guard('web_partner')->guest())
+            <form name="partner_redirect" id="partner_redirect-form" action="{{ url('/partner_home') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+            <script type="text/javascript">
+              window.onload = function() {
+                 document.forms["partner_redirect"].submit();
+              }
+            </script>            
           @endif          
         </ul>
       </div>
@@ -102,55 +130,216 @@
           <div class="intro-heading">DELIVERY EXPRESS!</div>
           <div class="intro-lead-in">en menos de 90 minutos</div>
           <div class="intro-lead-in">compramos y te llevamos lo que desees</div>
-          <a href="#services" class="btn btn-xl">Pide tu Paddy Aquí</a>
-        </div>
+          <!-- <a href="#services" class="btn btn-xl">Pide tu Paddy Aquí</a> -->
+          <div class="portfolio-link btn btn-xl" data-toggle="modal" href="#order-modal" style="cursor: pointer;">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                Pide tu Paddy Aquí
+              </div>
+            </div>
+          </div>                   
+        </div>        
       </div>
+      <div style="text-align: left;">
+        <a href='https://play.google.com/store/apps/details?id=pe.tumicro.android&hl=es&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img style='height:100px; width:250px' alt='Disponible en Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/es-419_badge_web_generic.png'/></a>
+      </div>       
     </header>
 
-    <!-- Services -->
-    <section id="services">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Services</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+    <!-- Login -->
+    <div class="portfolio-modal modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
           </div>
-        </div>
-        <div class="row text-center">
-          <div class="col-md-4">
-            <span class="fa-stack fa-4x">
-              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-              <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-            </span>
-            <h4 class="service-heading">E-Commerce</h4>
-            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-          </div>
-          <div class="col-md-4">
-            <span class="fa-stack fa-4x">
-              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-              <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
-            </span>
-            <h4 class="service-heading">Responsive Design</h4>
-            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-          </div>
-          <div class="col-md-4">
-            <span class="fa-stack fa-4x">
-              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-              <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-            </span>
-            <h4 class="service-heading">Web Security</h4>
-            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="modal-body">
+                  <img class="navbar-brand" src="../img/logos/paddy_brand.jpg" style="width:80px; height:80px;">
+
+                  <h1>Iniciar Sesión</h1>
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#user_login" data-toggle="tab">Usuario Paddy</a></li>
+                    <li><a href="#courier_login" data-toggle="tab">Courier Paddy</a></li>
+                    <li><a href="#partner_login" data-toggle="tab">Partner Paddy</a></li>
+                  </ul> 
+
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="user_login">
+                      <br>                    
+                      <form method="POST" action="{{ url('user_login') }}">                 
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <input class="form-control" id="user_login_email" type="email" placeholder="Correo Electrónico" required data-validation-required-message="Correo Electrónico">
+                            </div>
+                            <div class="form-group">
+                              <input class="form-control" id="user_login_pass" type="password" placeholder="Contraseña" required data-validation-requiered-message="Contraseña">
+                              <a href="{{ url('password_reset') }}">Olvidaste  tu password?</a>
+                         
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="clearfix"></div>
+                          <div class="col-lg-12 text-center">
+                            <div id="success"></div>
+                            <button class="btn btn-xl btn-block" type="submit">INGRESAR</button>
+                          </div>
+                        </div>
+                      </form>
+                      <hr>
+                      <div class="clearfix"></div>                  
+                      <div class="col-lg-12 text-center">
+                        Nuevo en Paddy? <a href="{{ url('user_signup') }}" class="btn btn-xl">Crear cuenta</a>
+                      </div>
+                    </div>
+
+                    <div class="tab-pane" id="courier_login">
+                      <br>                      
+                      <form method="POST" action="{{ url('courier_login') }}">                 
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <input class="form-control" id="courier_login_email" type="email" placeholder="Correo Electrónico" required data-validation-required-message="Correo Electrónico">
+
+                            </div>
+                            <div class="form-group">
+                              <input class="form-control" id="courier_login_pass" type="password" placeholder="Contraseña" required data-validation-requiered-message="Contraseña">
+                              <a href="{{ url('password_reset') }}">Olvidaste  tu password?</a>
+                            </div>
+                          </div>
+                          <div class="clearfix"></div>
+                          <div class="col-lg-12 text-center">
+                            <div id="success"></div>
+                            <button class="btn btn-xl btn-block" type="submit">INGRESAR</button>
+                          </div>
+                        </div>
+                      </form>
+                      <hr>
+                      <div class="clearfix"></div>                  
+                      <div class="col-lg-12 text-center">
+                        Nuevo en Paddy? <a href="{{ url('courier_signup') }}" class="btn btn-xl">Registro Paddy Courier</a>
+                      </div>                                            
+                    </div>
+ 
+                     <div class="tab-pane" id="partner_login">
+                      <br>                      
+                      <form method="POST" action="{{ url('partner_login') }}">                 
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <input class="form-control" id="partner_login_email" type="email" placeholder="Correo Electrónico" required data-validation-required-message="Correo Electrónico">
+
+                            </div>
+                            <div class="form-group">
+                              <input class="form-control" id="partner_login_pass" type="password" placeholder="Contraseña" required data-validation-requiered-message="Contraseña">
+                              <a href="{{ url('password_reset') }}">Olvidaste  tu password?</a>
+
+                            </div>
+                          </div>
+                          <div class="clearfix"></div>
+                          <div class="col-lg-12 text-center">
+                            <div id="success"></div>
+                            <button class="btn btn-xl btn-block" type="submit">INGRESAR</button>
+                          </div>
+                        </div>
+                      </form>                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Order Type Modal -->
+    <div class="portfolio-modal modal fade" id="order-modal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="modal-body">                          
+              <div class="row">
+                <div class="col-lg-6 mx-auto">
+                  <h1>Recadero</h1> 
+                  <img class="navbar-brand" src="../img/logos/paddy_brand.jpg" style="width:80px; height:80px;">
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="user_login">
+                      <div class="clearfix"></div>                  
+                      <div class="col-lg-12 text-center">
+                        <a href="{{ url('paddy_errand') }}" class="btn btn-xl">Solicitar Recadería</a>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+
+                <div class="col-lg-6 mx-auto">
+                  <h1>Mensajero</h1> 
+                  <img class="navbar-brand" src="../img/logos/paddy_brand.jpg" style="width:80px; height:80px;">
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="user_login">
+                      <div class="clearfix"></div>                  
+                      <div class="col-lg-12 text-center">
+                        <a href="{{ url('paddy_message') }}" class="btn btn-xl">Solicitar Mensajería</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Servicios</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Ventajas</h4>
+                    <p class="text-muted">Envios multipunto</p>
+                    <p class="text-muted">Atención personalizada</p>
+                    <p class="text-muted">Cobro por kilometraje recorrido</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">QUE ES PADDY?</h4>
+                    <p class="text-muted">Un recadero de confianza. Tú pides, nosotros lo compramos y te lo llevamos</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Portfolio Grid -->
+    <!-- Categorías -->
     <section class="bg-light" id="portfolio">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Portfolio</h2>
+            <h2 class="section-heading">Categorías</h2>
             <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
           </div>
         </div>
@@ -243,168 +432,118 @@
       </div>
     </section>
 
-    <!-- Team -->
-    <section class="bg-light" id="team">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Our Amazing Team</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="team-member">
-              <img class="mx-auto rounded-circle" src="img/team/1.jpg" alt="">
-              <h4>Kay Garland</h4>
-              <p class="text-muted">Lead Designer</p>
-              <ul class="list-inline social-buttons">
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-twitter"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-facebook"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-linkedin"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="team-member">
-              <img class="mx-auto rounded-circle" src="img/team/2.jpg" alt="">
-              <h4>Larry Parker</h4>
-              <p class="text-muted">Lead Marketer</p>
-              <ul class="list-inline social-buttons">
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-twitter"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-facebook"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-linkedin"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="team-member">
-              <img class="mx-auto rounded-circle" src="img/team/3.jpg" alt="">
-              <h4>Diana Pertersen</h4>
-              <p class="text-muted">Lead Developer</p>
-              <ul class="list-inline social-buttons">
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-twitter"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-facebook"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-linkedin"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center">
-            <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Clients -->
-    <section class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3 col-sm-6">
-            <a href="#">
-              <img class="img-fluid d-block mx-auto" src="img/logos/envato.jpg" alt="">
-            </a>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <a href="#">
-              <img class="img-fluid d-block mx-auto" src="img/logos/designmodo.jpg" alt="">
-            </a>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <a href="#">
-              <img class="img-fluid d-block mx-auto" src="img/logos/themeforest.jpg" alt="">
-            </a>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <a href="#">
-              <img class="img-fluid d-block mx-auto" src="img/logos/creative-market.jpg" alt="">
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Contact Us</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <form id="contactForm" name="sentMessage" novalidate>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input class="form-control" id="name" type="text" placeholder="Your Name *" required data-validation-required-message="Please enter your name.">
-                    <p class="help-block text-danger"></p>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" id="email" type="email" placeholder="Your Email *" required data-validation-required-message="Please enter your email address.">
-                    <p class="help-block text-danger"></p>
-                  </div>
-                  <div class="form-group">
-                    <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" required data-validation-required-message="Please enter your phone number.">
-                    <p class="help-block text-danger"></p>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <textarea class="form-control" id="message" placeholder="Your Message *" required data-validation-required-message="Please enter a message."></textarea>
-                    <p class="help-block text-danger"></p>
-                  </div>
-                </div>
-                <div class="clearfix"></div>
+    <!-- Se un paddy -->
+    <section id="becourier">
+        <div class="container">
+            <div class="row">
                 <div class="col-lg-12 text-center">
-                  <div id="success"></div>
-                  <button class="btn btn-xl" type="submit">Send Message</button>
+                    <h2 class="section-heading">Quieres ser un Paddy?</h2>
+                    <h3 class="section-subheading text-muted">Comienza a tener un ingreso extra cada mes en tu tiempo libre y conoce la ciudad</h3>
                 </div>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">¿ Qué necesitas ?</h4>
+                    <p class="text-muted">Tener moto propia, celular android, ser amable, paciente y orientado al servicio</p>
+                </div>
+                <div class="col-md-4">                
+                    <a href="{{ url('courier_signup') }}">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Registrate Aquí</h4>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    </a>                
+                </div>                    
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">aa</h4>
+                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Afilia tu Negocio -->
+    <section id="bepartner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Afilia tu Negocio</h2>
+                    <h3 class="section-subheading text-muted">Elije tu plan de servicio Paddy y ahorra tiempo y dinero</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 text-center">
+                    <p style="color:white">Un facilitador de ventas</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <p style="color:white">Tus productos seran promocionados y estaran al alcance de cualquiera</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <p style="color:white">Planes de servicios mas comodos</p>
+                </div>                                
+            </div>            
+            <div class="row">
+                <div class="col-lg-12">
+                    <form name="bepartner" id="bepartnerForm" novalidate method="POST" action="{{ url('partner_registro') }}">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="RUC *" name="ruc_emp" id="ruc_emp" required data-validation-required-message="Por favor ingrese el RUC de la empresa">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Razón Social *" name="rs_emp" id="rs_emp" required data-validation-required-message="Por favor ingrese la Razón Social de la empresa">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" class="form-control" placeholder="Dirección *" name="dir_emp" id="dir_emp" required data-validation-required-message="Por favor ingrese la dirección de la empresa">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Nombre del Contacto *" name="cont_emp" id="cont_emp" required data-validation-required-message="Por favor ingrese el nombre del contacto">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Telefono *" name="telef_emp" id="telef_emp" required data-validation-required-message="Por favor ingrese el telefono de la empresa">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Correo Electrónico *" name="email_emp" id="email_emp" required data-validation-required-message="Por favor ingrese el correo electrónico de la empresa">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="Porqué quieres ser parte de la plataforma" name="be" id="bepartnerwhy" required data-validation-required-message="Por favor ingresa el motivo"></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>                            
+                            </div>                     
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12 text-center">
+                            <div id="success_emp"></div>
+                            <button type="submit" class="btn btn-xl">Solicitar Afiliación</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -658,15 +797,14 @@
     <script src="vendor/popper/popper.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Plugin JavaScript -->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Contact form JavaScript -->
     <script src="js/jqBootstrapValidation.js"></script>
     <script src="js/contact_me.js"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="js/agency.js"></script>  
+    <script src="js/agency.js"></script>
+    <script src="js/nav.min.js"></script>
 
   </body>
 

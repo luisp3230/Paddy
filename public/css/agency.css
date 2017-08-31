@@ -124,6 +124,16 @@ body {
         }
 }
 
+@media (max-width: 991px) {
+    #mainNav .navbar-brand {   
+      top: 10px;
+      position:relative; 
+      width:40px;
+      height:40px;
+      position:absolute;
+    }
+}
+
 header.masthead {
   text-align: center;
   color: white;

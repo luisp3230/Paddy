@@ -1,0 +1,169 @@
+body {
+  font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
+body {
+background: url('/img/fondo_moto2.png') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-transform: uppercase; }
+
+  h2.title {
+    font-size: 40px;
+    margin-top: 0;
+    ; }
+
+.subhead{
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
+    text-transform: none;
+    text-align: center;
+    font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
+
+
+.funkyradio div {
+  clear: both;
+  overflow: hidden;
+}
+
+.funkyradio label {
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #D1D3D4;
+  font-weight: normal;
+}
+
+.funkyradio input[type="radio"]:empty,
+.funkyradio input[type="checkbox"]:empty {
+  display: none;
+}
+
+.funkyradio input[type="radio"]:empty ~ label,
+.funkyradio input[type="checkbox"]:empty ~ label {
+  position: relative;
+  line-height: 2.5em;
+  text-indent: 3.25em;
+  margin-top: 2em;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.funkyradio input[type="radio"]:empty ~ label:before,
+.funkyradio input[type="checkbox"]:empty ~ label:before {
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  width: 2.5em;
+  background: #D1D3D4;
+  border-radius: 3px 0 0 3px;
+}
+
+.funkyradio input[type="radio"]:hover:not(:checked) ~ label,
+.funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
+  color: #888;
+}
+
+.funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
+.funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
+  content: '\2714';
+  text-indent: .9em;
+  color: #C2C2C2;
+}
+
+.funkyradio input[type="radio"]:checked ~ label,
+.funkyradio input[type="checkbox"]:checked ~ label {
+  color: #777;
+}
+
+.funkyradio input[type="radio"]:checked ~ label:before,
+.funkyradio input[type="checkbox"]:checked ~ label:before {
+  content: '\2714';
+  text-indent: .9em;
+  color: #333;
+  background-color: #ccc;
+}
+
+.funkyradio input[type="radio"]:focus ~ label:before,
+.funkyradio input[type="checkbox"]:focus ~ label:before {
+  box-shadow: 0 0 0 3px #999;
+}
+
+.funkyradio-danger input[type="radio"]:checked ~ label:before,
+.funkyradio-danger input[type="checkbox"]:checked ~ label:before {
+  color: #fff;
+  background-color: #d9534f;
+}
+
+li{
+  opacity: 0.5;
+    overflow-x: hidden;
+}
+
+li#i1{
+  opacity: 1;
+}
+
+select {
+  background: transparent;
+    /*border: none;*/
+    color: #2BBF41;
+  line-height: 80px;
+  height: 100px;
+  max-width: 600px;
+  font-size: 50px;
+  box-shadow: #2BBF41;
+}
+
+input[type="text"] {
+  background: transparent;
+    /*border: none;*/
+    color: #2BBF41;
+  line-height: 80px;
+  height: 100px;
+  font-size: 50px;
+  box-shadow: #2BBF41;
+}
+
+
+.form-control {
+  max-width: 500px;
+}
+
+.form-control-dia {
+  max-width: 100px;
+}
+.form-control-mes {
+  max-width: 100px;
+}
+.form-control-anio {
+  max-width: 200px;
+}
+
+.confirm:before {
+  content: '✔';
+  background-color: gray;
+}
+
+.unconfirm:before {
+  content: 'X'; 
+  background-color: gray; 
+}

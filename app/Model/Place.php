@@ -11,7 +11,7 @@ class Place extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = 'name';
+    protected $fillable = ['name'];
 
    	protected $hidden = ['created_at', 'updated_at'];
 }
