@@ -6,52 +6,103 @@ $(document).ready(function(){
 
     $('input:first').focus();
 
+    document.getElementById('checkbox_101').onclick = function () {
+
+      $('#checkbox_101').parents('li').css('opacity','1'); 
+      // var speed = 500;
+      // $('html, body').animate({scrollTop: $('#checkbox_101').offset().top}, speed);
+    };
+
+    document.getElementById('checkbox_111').onclick = function () {
+
+      $('#checkbox_111').parents('li').css('opacity','1'); 
+      // var speed = 500;
+      // $('html, body').animate({scrollTop: $('#checkbox_101').offset().top}, speed);
+    };
+
+    document.getElementById('checkbox_112').onclick = function () {
+
+      $('#checkbox_112').parents('li').css('opacity','1'); 
+      // var speed = 500;
+      // $('html, body').animate({scrollTop: $('#checkbox_101').offset().top}, speed);
+    };
+
+    document.getElementById('checkbox_113').onclick = function () {
+
+      $('#checkbox_113').parents('li').css('opacity','1'); 
+      // var speed = 500;
+      // $('html, body').animate({scrollTop: $('#checkbox_101').offset().top}, speed);
+    };
+
+    document.getElementById('checkbox_114').onclick = function () {
+
+      $('#checkbox_114').parents('li').css('opacity','1'); 
+      // var speed = 500;
+      // $('html, body').animate({scrollTop: $('#checkbox_101').offset().top}, speed);
+    };      
+
+    document.getElementById('checkbox_121').onclick = function () {
+
+      $('#checkbox_121').parents('li').css('opacity','1'); 
+      // var speed = 500;
+      // $('html, body').animate({scrollTop: $('#checkbox_101').offset().top}, speed);
+    };           
+
+    document.getElementById('checkbox_122').onclick = function () {
+
+      $('#checkbox_122').parents('li').css('opacity','1'); 
+      // var speed = 500;
+      // $('html, body').animate({scrollTop: $('#checkbox_101').offset().top}, speed);
+    }; 
+
     $('input').focus(
         function(){
-            $(this).parents('li').css('opacity','1');
+          $(this).parents('li').css('opacity','1');
 
-             var el = $(this);
-             var elOffset = el.offset().top;
-             var elHeight = el.height();
-             var windowHeight = $(window).height();
-             var offset;
+          var el = $(this);
+          var elOffset = el.offset().top;
+          var elHeight = el.height();
+          var windowHeight = $(window).height();
+          var offset;
 
-             if (elHeight < windowHeight) {
-             offset = elOffset - ((windowHeight / 2) - (elHeight / 2));
-            }
-            else {
-            offset = elOffset;         
-            }
-             var speed = 500;
-             $('html, body').animate({scrollTop:offset}, speed);
+           if (elHeight < windowHeight) {
+           offset = elOffset - ((windowHeight / 2) - (elHeight / 2));
+          }
+          else {
+          offset = elOffset;         
+          }
+
+           var speed = 500;
+          
+           $('html, body').animate({scrollTop:offset}, speed);
         }).blur(
         function(){
             $(this).parents('li').css('opacity','0.5');
         });
 
-        $('select').focus(
-        function(){
+    $('select').focus(
+      function(){
+        $(this).parents('li').css('opacity','1');
 
-            $(this).parents('li').css('opacity','1');
+           var el = $(this);
+           var elOffset = el.offset().top;
+           var elHeight = el.height();
+           var windowHeight = $(window).height();
+           var offset;
 
-             var el = $(this);
-             var elOffset = el.offset().top;
-             var elHeight = el.height();
-             var windowHeight = $(window).height();
-             var offset;
-
-             if (elHeight < windowHeight) {
-             offset = elOffset - ((windowHeight / 2) - (elHeight / 2));
-            }
-            else {
-            offset = elOffset;         
-            }
-             var speed = 500;
-             $('html, body').animate({scrollTop:offset}, speed);
+           if (elHeight < windowHeight) {
+           offset = elOffset - ((windowHeight / 2) - (elHeight / 2));
+          }
+          else {
+          offset = elOffset;         
+          }
+           var speed = 500;
+           $('html, body').animate({scrollTop:offset}, speed);
         }).blur(
         function(){
             $(this).parents('li').css('opacity','0.5');
         });
+
 
         $('#fecnac_dia_moto').keydown(function(e){
            if (!e.shiftKey && ((e.keyCode < 48 || e.keyCode > 57) && 

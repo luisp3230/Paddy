@@ -36,10 +36,6 @@ Route::get('/password_reset', function(){
   return view('password_reset');
 });
 
-//Formulario completo para registro de usuario normal
-Route::get('user_signup', 'User\SignupController@showRegistrationForm');
-Route::post('user_signup', 'User\SignupController@register');
-
 //Formulario completo para ser un courier paddy y envío para su aprobación
 Route::get('courier_signup', 'Courier\SignupController@showRegistrationForm');
 Route::post('courier_signup', 'Courier\SignupController@register');

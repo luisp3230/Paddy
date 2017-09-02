@@ -57,12 +57,12 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin_auth' => \App\Http\Middleware\AuthenticateAdmin::class,
-        'admin_guest' => \App\Http\Middleware\RedirectIfAdminAuthenticated::class, 
+        'admin_check' => \App\Http\Middleware\RedirectIfAdminAuthenticated::class, 
         'user_auth' => \App\Http\Middleware\AuthenticateUser::class,
-        'user_guest' => \App\Http\Middleware\RedirectIfUserAuthenticated::class,
+        'user_check' => \App\Http\Middleware\RedirectIfUserAuthenticated::class,
         'courier_auth' => \App\Http\Middleware\AuthenticateCourier::class,
-        'courier_guest' => \App\Http\Middleware\RedirectIfCourierAuthenticated::class, 
+        'courier_check' => \App\Http\Middleware\RedirectIfCourierAuthenticated::class, 
         'partner_auth' => \App\Http\Middleware\AuthenticatePartner::class,
-        'partner_guest' => \App\Http\Middleware\RedirectIfPartnerAuthenticated::class,
+        'partner_check' => \App\Http\Middleware\RedirectIfPartnerAuthenticated::class,
     ];
 }

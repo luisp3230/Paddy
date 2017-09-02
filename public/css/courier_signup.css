@@ -46,10 +46,12 @@ h6 {
   font-weight: normal;
 }
 
+
 .funkyradio input[type="radio"]:empty,
 .funkyradio input[type="checkbox"]:empty {
   display: none;
 }
+
 
 .funkyradio input[type="radio"]:empty ~ label,
 .funkyradio input[type="checkbox"]:empty ~ label {
@@ -107,11 +109,13 @@ h6 {
   box-shadow: 0 0 0 3px #999;
 }
 
+
 .funkyradio-danger input[type="radio"]:checked ~ label:before,
 .funkyradio-danger input[type="checkbox"]:checked ~ label:before {
   color: #fff;
   background-color: #d9534f;
 }
+
 
 li{
   opacity: 0.5;
@@ -143,6 +147,15 @@ input[type="text"] {
   box-shadow: #2BBF41;
 }
 
+input[type="checkbox"] {
+  background: transparent;
+    /*border: none;*/
+    color: #2BBF41;
+  line-height: 80px;
+  height: 100px;
+  font-size: 50px;
+  box-shadow: #2BBF41;
+}
 
 .form-control {
   max-width: 500px;

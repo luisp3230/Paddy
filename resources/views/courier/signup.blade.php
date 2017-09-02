@@ -101,9 +101,9 @@
 			<div class="row">
 				<div class="col-lg-4 funkyradio">
 			    	<div class="funkyradio-danger">
-			        	<input type="checkbox" name="checkbox" id="checkbox4" 
+			        	<input type="checkbox" name="checkbox" id="checkbox_signup" 
 			        			onchange="document.getElementById('begin_signup').disabled = !this.checked;"/>
-			        	<label for="checkbox4">Aceptar términos y condiciones</label>
+			        	<label for="checkbox_signup">Aceptar términos y condiciones</label>
 			    	</div>
 			    </div>
 			    <div class="col-lg-8" style="text-align:center; margin-top: 2em;">
@@ -243,7 +243,7 @@
 
 				<li id="i7">
 					<div class="wrapper" style="height: 300px;">
-			        	<div class="question"><span>Fecha de Nacimiento *</span></div>
+			        	<h3>Fecha de Nacimiento *</h3>
 						<div class="content">
 							<div class="content-wrapper">
 								<div class="input-group">
@@ -260,7 +260,7 @@
 
 				<li id="i8">
 					<div class="wrapper" style="height: 300px;">
-			        	<div class="question"><span>Dirección *</span></div>
+			        	<h3>Dirección *</h3>
 						<div class="content">
 							<div class="content-wrapper">
 								<div class="input-group">
@@ -275,7 +275,7 @@
 
 				<li id="i9">
 					<div class="wrapper" style="height: 300px;">
-			        	<div class="question"><span>Distrito *</span></div>
+			        	<h3>Distrito *</h3>
 						<div class="content">
 							<div class="content-wrapper">
 								<div class="input-group">
@@ -295,21 +295,25 @@
 
 				<li id="i10">
 					<div class="wrapper" style="height: 300px;">
-			        	<div class="question"><span>De qué tiempo dispones? *</span></div>
+			        	<h3>De qué tiempo dispones? *</h3>
 						<div class="content">					
 							<div class="content-wrapper">
-								<div class="input-group funkyradio">
-							    	<div class="funkyradio-danger">
-							        	<input type="checkbox" name="checkbox" id="checkbox4"/>
-							        	<label for="checkbox4">Entre semana</label>
-							    	</div>
+								<div class="input-group">
+									<div class="funkyradio">
+								    	<div class="funkyradio-danger">
+								        	<input type="checkbox" id="checkbox_101" onblur="InputFunction()"/>
+								        	<label for="checkbox_101">Entre semana</label>
+								    	</div>
+							    	</div>				    	
 							    </div>
-								<div class="input-group funkyradio">							    
-							    	<div class="funkyradio-danger">
-							        	<input type="checkbox" name="checkbox" id="checkbox4"/>
-							        	<label for="checkbox4">Fines de semana</label>
-							    	</div>						    	
-							    </div>	
+								<div class="input-group">
+									<div class="funkyradio">
+								    	<div class="funkyradio-danger">
+								        	<input type="checkbox" id="checkbox_102" onblur="InputFunction()"/>
+								        	<label for="checkbox_102">Fines de semana</label>
+								    	</div>	
+							    	</div>				    	
+							    </div>							    
 	<!-- 							<div class="input-group">
 <!									<input name="p_disp1" type="hidden" value="false">
 									<input name="p_disp2" type="hidden" value="false"> -->
@@ -327,22 +331,54 @@
 
 				<li id="i11">
 					<div class="wrapper" style="height: 300px;">
-			        	<div class="question"><span>Como supiste de Paddy?</span></div>
+			        	<h3>Como supiste de Paddy?</h3>
 						<div class="content">
 							<div class="content-wrapper">
-								<div class="form-group">
+								<!-- <div class="input-group">
 									<div class="control">
 										<input name="p_paddyhow1" type="hidden" value="false">
 										<input name="p_paddyhow2" type="hidden" value="false">
 										<input name="p_paddyhow3" type="hidden" value="false">
-										<input name="p_paddyhow4" type="hidden" value="false">
+										<input name="p_paddyhow4" type="hidden" value="false"> -->
 
-										<input class="form-control form-control-danger" type="checkbox" value="1" name="p_paddyhow1" id="p_paddyhow1">Facebook
+								<div class="input-group">
+									<div class="funkyradio">
+								    	<div class="funkyradio-danger">
+								        	<input type="checkbox" id="checkbox_111"/>
+								        	<label for="checkbox_111">Facebook</label>
+								    	</div>
+							    	</div>				    	
+							    </div>
+								<div class="input-group">
+									<div class="funkyradio">
+								    	<div class="funkyradio-danger">
+								        	<input type="checkbox" id="checkbox_112"/>
+								        	<label for="checkbox_112">Instagram</label>
+								    	</div>
+							    	</div>				    	
+							    </div>
+								<div class="input-group">
+									<div class="funkyradio">
+								    	<div class="funkyradio-danger">
+								        	<input type="checkbox" id="checkbox_113"/>
+								        	<label for="checkbox_113">Twitter</label>
+								    	</div>
+							    	</div>				    	
+							    </div>	
+								<div class="input-group">
+									<div class="funkyradio">
+								    	<div class="funkyradio-danger">
+								        	<input type="checkbox" id="checkbox_114"/>
+								        	<label for="checkbox_114">A traves de un amigo</label>
+								    	</div>
+							    	</div>				    	
+							    </div>							    						    							    
+<!-- 										<input class="form-control form-control-danger" type="checkbox" value="1" name="p_paddyhow1" id="p_paddyhow1">Facebook
 										<input class="form-control form-control-danger" type="checkbox" value="2" name="p_paddyhow2" id="p_paddyhow2">Instagram
 										<input class="form-control form-control-danger" type="checkbox" value="3" name="p_paddyhow3" id="p_paddyhow3">Twitter
-										<input class="form-control form-control-danger" type="checkbox" value="4" name="p_paddyhow4" id="p_paddyhow4">A través de un amigo
-									</div>
-								</div>
+										<input class="form-control form-control-danger" type="checkbox" value="4" name="p_paddyhow4" id="p_paddyhow4">A través de un amigo -->
+									<!-- </div> -->
+								<!-- </div> -->
 									<div id="message"><span></span></div>
 							</div>
 						</div>
@@ -350,21 +386,37 @@
 				</li>
 
 				<li id="i12">
-					<div class="wrapper" style="height: 300px;">
-			        	<div class="question"><span>Quiero formar parte de Paddy porque deseo... *</span></div>
+					<div class="wrapper" style="height: 300px;  margin-top: 100px">
+			        	<h3>Quiero formar parte de Paddy porque deseo... *</h3>
 						<div class="content">
 							<div class="content-wrapper">
-								<div class="form-group">
+			<!-- 					<div class="input-group">
 									<div class="control">
 										<input name="p_paddywhy1" type="hidden" value="false">
-										<input name="p_paddywhy2" type="hidden" value="false">
+										<input name="p_paddywhy2" type="hidden" value="false"> -->
 
-										<input class="form-control form-control-danger" type="checkbox" value="1" name="p_paddywhy1" id="p_paddywhy1">Ser un trabajador independiente
+								<div class="input-group">
+									<div class="funkyradio">
+								    	<div class="funkyradio-danger">
+								        	<input type="checkbox" id="checkbox_121"/>
+								        	<label for="checkbox_121">Ser un trabajador independiente</label>
+								    	</div>
+							    	</div>				    	
+							    </div>
+
+								<div class="input-group">
+									<div class="funkyradio">
+								    	<div class="funkyradio-danger">
+								        	<input type="checkbox" id="checkbox_122"/>
+								        	<label for="checkbox_122">Generar ingresos adicionales al trabajo que ya tengo</label>
+								    	</div>
+							    	</div>				    	
+							    </div>
+
+<!-- 										<input class="form-control form-control-danger" type="checkbox" value="1" name="p_paddywhy1" id="p_paddywhy1">Ser un trabajador independiente
 										<input class="form-control form-control-danger" type="checkbox" value="2" name="p_paddywhy2" id="p_paddywhy2">Generar ingresos adicionales al trabajo que ya tengo
-										<input class="form-control form-control-danger" type="text" id="p_paddywhy3" onblur="InputFunction()">Otro
-									</div>
-									<div class="clear"></div>
-								</div>
+										<input class="form-control form-control-danger" type="text" id="p_paddywhy3" onblur="InputFunction()">Otro -->
+									<!-- </div> -->
 								<div id="message"><span></span></div>
 							</div>
 						</div>
@@ -372,7 +424,7 @@
 				</li>	
 			</ul>
 				<div class="form-group">
-					<input type="button" value="Enviar Datos" onclick="SubmitForm()" />
+					<input type="button" class="btn btn-lg btn-success btn-block" value="ENVIAR DATOS" onclick="SubmitForm()" />
 				</div>
 			</form>
 		</section>	

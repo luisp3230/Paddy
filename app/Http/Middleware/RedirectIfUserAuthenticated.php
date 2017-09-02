@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class RedirectIfUserAuthenticated
 {
@@ -17,14 +18,14 @@ class RedirectIfUserAuthenticated
     {
       //If request comes from logged in user, he will
       //be redirect to home page.
-        if (Auth::guard()->check()) {
-            return redirect('/');
-        }
+        // if (Auth::guard()->check()) {
+        //     return redirect('/');
+        // }
 
       //If request comes from logged in seller, he will
       //be redirected to seller's home page.
         if (Auth::guard('web_user')->check()) {
-            return redirect('/');
+            return Redirect::intended('/'); 
         }
 
         return $next($request);
